@@ -24,9 +24,10 @@ public class BaseTest {
     @Before
     @DisplayName("Создание переменных и пользователя")
     public void create() {
-        WebDriverFactory webDriver = new WebDriverFactory();
-        WebDriverManager.chromedriver().setup();
-        driver = webDriver.getWebDriver();
+
+        WebDriverManager.chromedriver().setup();// Настройка WebDriverManager
+
+        driver = WebDriverFactory.getWebDriver();// Вызов статического метода напрямую
         driver.get(SITE);
 
         mainPage = new MainPage(driver);
@@ -36,13 +37,13 @@ public class BaseTest {
         infoUserPage = new InfoUserPage(driver);
         user = userGenerator.getUser();
 
-        userClient.createUser(user);
+        UserClient.createUser(user);// Вызов статического метода через имя класса
     }
 
     @After
     @DisplayName("Выход из браузера и удаление пользователя")
     public void delete() {
-        userClient.deleteUser(user);
+        UserClient.deleteUser(user);// Вызов статического метода через имя класса
         driver.quit();
     }
 }
