@@ -11,8 +11,8 @@ import pageobject.MainPage;
 import static org.junit.Assert.assertEquals;
 
 public class TransitionBurgerTest {
-    private static BaseTest baseTest;
-    private static final String site = baseTest.SITE;
+
+    private static final String site = BaseTest.SITE;// Используем BaseTest.SITE напрямую
     private WebDriver driver;
     private pageobject.MainPage mainPage;
 
@@ -27,8 +27,9 @@ public class TransitionBurgerTest {
 
     @Test
     @DisplayName("Переход в раздел 'Булки'.")
-    @Description("Проверка перехода в раздел 'Булки'.")
+
     public void checkGoToBuns() {
+        mainPage.clickSauce();
         mainPage.clickBun();
         String bun = mainPage.checkActivity();
         assertEquals("Булки", bun);
@@ -54,6 +55,7 @@ public class TransitionBurgerTest {
 
     @After
     public void tearDown() {
+
         driver.quit();
     }
 }
