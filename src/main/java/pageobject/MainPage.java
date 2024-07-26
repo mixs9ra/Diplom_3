@@ -39,8 +39,7 @@ public class MainPage {
 
     @Step("Клик по кнопке 'Булки' в конструкторе бургера.")
     public void clickBun() {
-        waitLoadHeader();
-        clickSauce();
+
         driver.findElement(sectionBun).click();
     }
 

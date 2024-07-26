@@ -6,23 +6,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class WebDriverFactory {
     public static WebDriver getWebDriver() {
+        // Получаем значение свойства browser, если оно не задано, то по умолчанию "chrome"
         String browser = System.getProperty("browser", "chrome");
 
         switch (browser) {
             case "yandex":
-                // Путь к chromedriver указан правильно
+                // Указываем путь к chromedriver для Яндекс.Браузера
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver");
 
-                ChromeOptions options = new ChromeOptions();
+                ChromeOptions yandexOptions = new ChromeOptions();
+                // Указываем путь к бинарному файлу Яндекс.Браузера
+                yandexOptions.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
 
-                // Путь к Yandex Browser
-                options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
-
-                // Возвращаем ChromeDriver с указанными опциями
-                return new ChromeDriver(options);
+                // Возвращаем ChromeDriver с указанными опциями для Яндекс.Браузера
+                return new ChromeDriver(yandexOptions);
 
             default:
-                // Для Chrome Browser
+                // Указываем путь к chromedriver для Google Chrome
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
                 return new ChromeDriver();
         }
