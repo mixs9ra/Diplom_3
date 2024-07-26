@@ -13,30 +13,22 @@ import user.UserClient;
 
 import static org.junit.Assert.assertEquals;
 
-public class RegistrationTest {
+public class RegistrationTest extends BaseTest { // Наследуемся от базового класса
 
-    public static final String INVALID_PASSWORD = "Некорректный пароль";
-    private static BaseTest baseTest;
-    private static final String site = baseTest.SITE;
-    private pageobject.MainPage mainPage;
-    private pageobject.RegistrationPage registrationPage;
-    private pageobject.LoginPage loginPage;
-    private WebDriver driver;
-    private user.UserClient userClient;
-    private final String expectedUrl = baseTest.SITE + "login";
+    private static final String INVALID_PASSWORD = "Некорректный пароль";
+    private final String expectedUrl = SITE + "login"; // Используем SITE из базового класса
     private String actual;
 
     @Before
     public void startUp() {
-        WebDriverFactory webDriver = new WebDriverFactory();
         WebDriverManager.chromedriver().setup();
-        driver = webDriver.getWebDriver();
-        driver.get(site);
+        driver = WebDriverFactory.getWebDriver(); // Используем статический метод напрямую
+        driver.get(SITE); // URL теперь используется из базового класса
 
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registrationPage = new RegistrationPage(driver);
-        userClient = new UserClient();
+
     }
 
     @DisplayName("Переход на форму регистрации")
